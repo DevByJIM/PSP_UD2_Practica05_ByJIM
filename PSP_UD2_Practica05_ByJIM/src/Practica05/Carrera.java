@@ -1,14 +1,8 @@
 package Practica05;
 
-import java.util.concurrent.Semaphore;
-
 public class Carrera {
-	private static int numCorredores;
-	Semaphore semaf = new Semaphore(1, false);
-	
-	public Carrera() {
-		
-	}
+	private int numCorredores;
+	private static int ocupacion=5;
 	
 	public synchronized void CorredorListo() {
 		numCorredores++;
@@ -21,18 +15,19 @@ public class Carrera {
 			try {
 				wait();
 			} catch (InterruptedException e) {
-
 				e.printStackTrace();
 			}
-		}
-			
+		}		
 	}
 	
 	public synchronized void Correr(Corredor corredor) {
-
+		System.out.println();
 		System.out.println("El " + corredor.getName() + " empieza la vuelta");
 		System.out.println("El " + corredor.getName() + " termina la vuelta");
-		
+		ocupacion--;
+		if (ocupacion == 0) {
+			System.out.println("La carrera a terminado.");
+		}
 	}
 	
 }

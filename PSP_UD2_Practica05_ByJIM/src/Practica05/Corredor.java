@@ -15,16 +15,8 @@ public class Corredor extends Thread{
 	public void run() {
 				
 		carrera.CorredorListo();
-		
-		try {
-			carrera.semaf.acquire();
 
-			carrera.Correr(this);
-			
-			carrera.semaf.release();
-			
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		carrera.Correr(this);
+
 	}
 }
